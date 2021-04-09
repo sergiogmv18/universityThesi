@@ -1,0 +1,5 @@
+{
+    "require": {
+        "erandir/plug-route": "^4.0"
+    }
+}

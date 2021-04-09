@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página do Usuário</title>
+
+    <!-- CSS - Materialize-->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link  href="../style/materialize/css/materialize.css" media="screen,projection" />
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+   
+    <!-- <link rel="stylesheet" href="/style/sass/home.css"> -->
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #C4C4C4;
+            display: grid;
+        }
+        
+        .corpo {
+            width: 80%;
+            min-height: 500px;
+            margin: 5% auto;
+            padding: 10px;
+            background-color: fff;
+            display: grid;
+            grid-template-columns: 60% 40%;
+        }
+        
+        .conteudo-esquerdo {
+            background-color: #fff;
+            padding: 10px;
+        }
+        
+        .conteudo-direito {
+            background-color: #fff;
+            padding: 20px;
+        }
+        
+        .user-imagem img {
+            width: 150px;
+            border-radius: 50%;
+            margin: auto;
+            padding-bottom: 10px;
+        }
+        
+        .tabela-dados {
+            margin: auto;
+            width: 250px;
+            padding: 20px;
+        }
+        
+        .btn-switch {
+            text-align: center;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+        }
+        @main-bg:rgb(40,40,59);
+@calendar-border:rgb(220,220,255);
+@calendar-bg:#fff;
+@calendar-standout:rgb(40,40,59);
+@calendar-color:#444;
+@calendar-fade-color:#c0c0c0;
+@body-color:#444;
+
+html, body {
+  height:100%;
+}
+body {
+  font-size:100%;
+  line-height:1.5;
+  font-family: "Roboto Condensed", sans-serif;
+  background:@main-bg;
+  background-image:linear-gradient(@main-bg 0%, darken(@main-bg,12%) 100%);
+  color:@body-color;
+}
+
+*, *:before, *:after {
+  box-sizing:border-box;
+}
+
+.group {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+img {
+  max-width:100%;
+  height:auto;
+  vertical-align:baseline;
+}
+
+a {
+  text-decoration:none;
+}
+
+.max(@maxWidth;
+  @rules) {
+    @media only screen and (max-width: @maxWidth) {
+      @rules();
+    }
+  }
+
+.min(@minWidth;
+  @rules) {
+    @media only screen and (min-width: @minWidth) {
+      @rules();
+    }
+  }
+
+
+.calendar-wrapper {
+  width:360px;
+  margin:3em auto;
+  padding:2em;
+  border:1px solid @calendar-border;
+  border-radius:5px;
+  background:@calendar-bg;
+  
+}
+table {
+  clear:both;
+  width:100%;
+  border:1px solid @calendar-border;
+  border-radius:3px;
+  border-collapse:collapse;
+  color:@calendar-color;
+}
+td {
+  height:48px;
+  text-align:center;
+  vertical-align:middle;
+  border-right:1px solid @calendar-border;
+  border-top:1px solid @calendar-border;
+  width:100% / 7;
+}
+td.not-current {
+  color:@calendar-fade-color;;
+}
+td.normal {}
+td.today {
+  font-weight:700;
+  color:@calendar-standout;
+  font-size:1.5em;
+}
+thead td {
+  border:none;
+  color:@calendar-standout;
+  text-transform:uppercase;
+  font-size:1.5em;
+}
+#btnPrev {
+  float:left;
+  margin-bottom:20px;
+  &:before {
+    content:'\f104';
+    font-family:FontAwesome;
+    padding-right:4px;
+  }
+}
+#btnNext {
+  float:right;
+  margin-bottom:20px;
+  &:after {
+    content:'\f105';
+    font-family:FontAwesome;
+    padding-left:4px;
+  }
+}
+#btnPrev, #btnNext {
+  background:transparent;
+  border:none;
+  outline:none;
+  font-size:1em;
+  color:@calendar-fade-color;
+  cursor:pointer;
+  font-family:"Roboto Condensed", sans-serif;
+  text-transform:uppercase;
+  transition:all 0.3s ease;
+  &:hover {
+    color:@calendar-standout;
+    font-weight:bold;
+  }
+}
+    </style>
+
+</head>
+
+<body>
+    <div class="corpo">
+
+        <div class="conteudo-esquerdo">
+            <h3>Horários:</h3>
+
+            <div class="row">
+
+                <div class="input-field col s2" style="text-align: center;">
+                    <i class="material-icons small">access_alarm</i>
+                </div>
+                <div class="item input-field col s3">
+                    <input id="first_name2" type="time" class="validate" value="17:00" step="900">
+                    <label class="active" for="first_name2">Ligar:</label>
+                </div>
+
+                <div class="item input-field col s3">
+                    <input id="first_name2" type="time" class="validate" value="09:00">
+                    <label class="active" for="first_name2">Desligar:</label>
+                </div>
+            </div>
+            <div class="calendar-wrapper">
+                <button id="btnPrev" type="button">Prev</button>
+                  <button id="btnNext" type="button">Next</button>
+                <div id="divCal"></div>
+              </div>
+        </div>
+
+        <div class="conteudo-direito">
+
+            <div class="user-imagem">
+                <img class="materialboxed" src="../style/img/pessoa-sorrindo.jpeg">
+            </div>
+
+            <table class="tabela-dados highlight">
+                <tbody>
+                    <tr>
+                        <td>Nome:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>IP:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Cidade</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>E-mail:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Telefone:</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Switch: criar modal solictando confirmação de ligar ou desligar -->
+            <div class="switch btn-switch">
+
+                <h5>Alarme</h5>
+                <label>
+                    Off
+                    <input id="checkbox" type="checkbox">
+                    <span class="lever"></span>
+                    On
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+          <h4>Modal Header</h4>
+          <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+      </div>
+
+    <!-- JavaScrip - Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../style/jquery-ui-1.12.1.custom/jquery-3.5.1.min.js"></script>
+    <script src="../style/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="../style/materialize/js/materialize.min.js"></script>
+    <script src="../style/materialize/js/materialize.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".materialboxed").materialbox();
+            $('.modal').modal();
+        });
+        $(document).ready(function(){
+            
+        });
+        $('#checkbox').on('click' , function(){
+           $('.modal').open();
+            
+
+        })
+        var Cal = function(divId) {
+
+//Store div id
+this.divId = divId;
+
+// Days of week, starting on Sunday
+this.DaysOfWeek = [
+  'Sun',
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat'
+];
+
+// Months, stating on January
+this.Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+
+// Set the current month, year
+var d = new Date();
+
+this.currMonth = d.getMonth();
+this.currYear = d.getFullYear();
+this.currDay = d.getDate();
+
+};
+
+// Goes to next month
+Cal.prototype.nextMonth = function() {
+if ( this.currMonth == 11 ) {
+  this.currMonth = 0;
+  this.currYear = this.currYear + 1;
+}
+else {
+  this.currMonth = this.currMonth + 1;
+}
+this.showcurr();
+};
+
+// Goes to previous month
+Cal.prototype.previousMonth = function() {
+if ( this.currMonth == 0 ) {
+  this.currMonth = 11;
+  this.currYear = this.currYear - 1;
+}
+else {
+  this.currMonth = this.currMonth - 1;
+}
+this.showcurr();
+};
+
+// Show current month
+Cal.prototype.showcurr = function() {
+this.showMonth(this.currYear, this.currMonth);
+};
+
+// Show month (year, month)
+Cal.prototype.showMonth = function(y, m) {
+
+var d = new Date()
+// First day of the week in the selected month
+, firstDayOfMonth = new Date(y, m, 1).getDay()
+// Last day of the selected month
+, lastDateOfMonth =  new Date(y, m+1, 0).getDate()
+// Last day of the previous month
+, lastDayOfLastMonth = m == 0 ? new Date(y-1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+
+
+var html = '<table>';
+
+// Write selected month and year
+html += '<thead><tr>';
+html += '<td colspan="7">' + this.Months[m] + ' ' + y + '</td>';
+html += '</tr></thead>';
+
+
+// Write the header of the days of the week
+html += '<tr class="days">';
+for(var i=0; i < this.DaysOfWeek.length;i++) {
+  html += '<td>' + this.DaysOfWeek[i] + '</td>';
+}
+html += '</tr>';
+
+// Write the days
+var i=1;
+do {
+
+  var dow = new Date(y, m, i).getDay();
+
+  // If Sunday, start new row
+  if ( dow == 0 ) {
+    html += '<tr>';
+  }
+  // If not Sunday but first day of the month
+  // it will write the last days from the previous month
+  else if ( i == 1 ) {
+    html += '<tr>';
+    var k = lastDayOfLastMonth - firstDayOfMonth+1;
+    for(var j=0; j < firstDayOfMonth; j++) {
+      html += '<td class="not-current">' + k + '</td>';
+      k++;
+    }
+  }
+
+  // Write the current day in the loop
+  var chk = new Date();
+  var chkY = chk.getFullYear();
+  var chkM = chk.getMonth();
+  if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
+    html += '<td class="today">' + i + '</td>';
+  } else {
+    html += '<td class="normal">' + i + '</td>';
+  }
+  // If Saturday, closes the row
+  if ( dow == 6 ) {
+    html += '</tr>';
+  }
+  // If not Saturday, but last day of the selected month
+  // it will write the next few days from the next month
+  else if ( i == lastDateOfMonth ) {
+    var k=1;
+    for(dow; dow < 6; dow++) {
+      html += '<td class="not-current">' + k + '</td>';
+      k++;
+    }
+  }
+
+  i++;
+}while(i <= lastDateOfMonth);
+
+// Closes table
+html += '</table>';
+
+// Write HTML to the div
+document.getElementById(this.divId).innerHTML = html;
+};
+
+// On Load of the window
+window.onload = function() {
+
+// Start calendar
+var c = new Cal("divCal");      
+c.showcurr();
+
+// Bind next and previous button clicks
+getId('btnNext').onclick = function() {
+  c.nextMonth();
+};
+getId('btnPrev').onclick = function() {
+  c.previousMonth();
+};
+}
+
+// Get element by id
+function getId(id) {
+return document.getElementById(id);
+}
+    </script>
+
+</body>
+
+</html>
