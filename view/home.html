@@ -30,17 +30,17 @@
         }
         
         .corpo {
-            width: 80%;
+            /* width: 80%; */
             min-height: 500px;
-            margin: 5% auto;
-            padding: 10px;
-            background-color: fff;
+            /* margin: 5% auto;
+            padding: 10px; */
+            background-color: #fff;
             display: grid;
             grid-template-columns: 60% 40%;
         }
-        
+        s
         .conteudo-esquerdo {
-            background-color: #fff;
+          background-color: white;
             padding: 10px;
         }
         
@@ -126,25 +126,27 @@ a {
 
 
 .calendar-wrapper {
-  width:360px;
-  margin:3em auto;
+  /* width:360px; */
+  width: 100%;
+  margin-top: -49px;
+  /* margin:3em auto; */
   padding:2em;
   border:1px solid @calendar-border;
   border-radius:5px;
-  background:@calendar-bg;
+  background-color:#fff;
   
 }
-table {
+/* table {
   clear:both;
   width:100%;
   border:1px solid @calendar-border;
   border-radius:3px;
   border-collapse:collapse;
   color:@calendar-color;
-}
+} */
 td {
   height:48px;
-  text-align:center;
+  /* text-align:center; */
   vertical-align:middle;
   border-right:1px solid @calendar-border;
   border-top:1px solid @calendar-border;
@@ -155,6 +157,7 @@ td.not-current {
 }
 td.normal {}
 td.today {
+  background-color: coral;
   font-weight:700;
   color:@calendar-standout;
   font-size:1.5em;
@@ -163,129 +166,145 @@ thead td {
   border:none;
   color:@calendar-standout;
   text-transform:uppercase;
-  font-size:1.5em;
+  /* font-size:1.5em; */
 }
-/* #btnPrev {
-  float:left;
-  margin-bottom:20px;
-  &:before {
-    content:'\f104';
-    font-family:FontAwesome;
-    padding-right:4px;
+.father-is-body{
+    width: 80%;
+    margin: auto;
+    margin-top: 0;
+}
+.horario{
+  text-align: center; 
+}
+.row .col.s2 {
+  width: 56px;
   }
-} */
-/* #btnNext {
-  float:right;
-  margin-bottom:20px;
-  &:after {
-    content:'\f105';
-    font-family:FontAwesome;
-    padding-left:4px;
-  }
-} */
-/* #btnPrev, #btnNext {
-  background:transparent;
-  border:none;
-  outline:none;
-  font-size:1em;
-  color:@calendar-fade-color;
-  cursor:pointer;
-  font-family:"Roboto Condensed", sans-serif;
-  text-transform:uppercase;
-  transition:all 0.3s ease;
-  &:hover {
-    color:@calendar-standout;
-    font-weight:bold;
-  }
-} */
-    </style>
+.mes , .dias, .not-current, .normal, .today{
+  text-align: center;
+}
+</style>
 
 </head>
 
 <body>
-    <div class="corpo">
+    <div class="father-is-body">
+        <ul id="tabs-swipe-demo" class="tabs">
+            <li class="tab col s3"><a href="#test-swipe-1">usuario</a></li>
+            <li class="tab col s3"><a class="active" href="#test-swipe-2">quem somos</a></li>
+            <li class="tab col s3"><a class="active" href="#test-swipe-3">perfil</a></li>
+            <!-- <li class="tab col s3"><a href="#test-swipe-3"></a></li> -->
+        </ul>
+        <div id="test-swipe-1" class="col s12">
+            <div class="corpo">
 
-        <div class="conteudo-esquerdo">
-            <h3>Horários:</h3>
-
-            <div class="row">
-
-                <div class="input-field col s2" style="text-align: center;">
-                    <i class="material-icons small">access_alarm</i>
+                <div class="conteudo-esquerdo">
+                    <p class="horario">Horários:</p>
+                    <div class="row" style="padding-left: 2em;">
+        
+                        <div class="input-field col s2" style="text-align: center;">
+                            <i class="material-icons" style="font-size: 3rem;">access_alarm</i>
+                        </div>
+                        <div class="item input-field col s5">
+                            <input id="first_name2" type="time" class="validate" value="17:00" step="900">
+                            <label class="active" for="first_name2">Ligar:</label>
+                        </div>
+        
+                        <div class="item input-field col s5">
+                            <input id="first_name2" type="time" class="validate" value="09:00">
+                            <label class="active" for="first_name2">Desligar:</label>
+                        </div>
+                    </div>
+                    <div class="calendar-wrapper">
+                        <!-- <button id="btnPrev" type="button">Prev</button>
+                          <button id="btnNext" type="button">Next</button> -->
+                        <div id="divCal"></div>
+                      </div>
                 </div>
-                <div class="item input-field col s3">
-                    <input id="first_name2" type="time" class="validate" value="17:00" step="900">
-                    <label class="active" for="first_name2">Ligar:</label>
+        
+                <div class="conteudo-direito">
+        
+                    <div class="user-imagem">
+                        <img class="materialboxed" src="../style/img/pessoa-sorrindo.jpeg">
+                    </div>
+                    <table class="tabela-dados highlight">
+                      <tbody>
+                          <tr>
+                              <td>Nome:</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                              <td>IP:</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                              <td>Cidade</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                              <td>E-mail:</td>
+                              <td></td>
+                          </tr>
+                          <tr>
+                              <td>Telefone:</td>
+                              <td></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                          
+                    
+                    <!-- Switch: criar modal solictando confirmação de ligar ou desligar -->
+                    <div class="switch btn-switch">
+        
+                        <h5>Alarme</h5>
+                        <label>
+                            Off
+                            <input id="checkbox" type="checkbox">
+                            <span class="lever"></span>
+                            On
+                        </label>
+                    </div>
                 </div>
-
-                <div class="item input-field col s3">
-                    <input id="first_name2" type="time" class="validate" value="09:00">
-                    <label class="active" for="first_name2">Desligar:</label>
-                </div>
+        
             </div>
-            <div class="calendar-wrapper">
-                <!-- <button id="btnPrev" type="button">Prev</button>
-                  <button id="btnNext" type="button">Next</button> -->
-                <div id="divCal"></div>
-              </div>
+    
         </div>
-
-        <div class="conteudo-direito">
-
-            <div class="user-imagem">
-                <img class="materialboxed" src="../style/img/pessoa-sorrindo.jpeg">
-            </div>
-
-            <table class="tabela-dados highlight">
-                <tbody>
-                    <tr>
-                        <td>Nome:</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>IP:</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Cidade</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail:</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Telefone:</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <!-- Switch: criar modal solictando confirmação de ligar ou desligar -->
-            <div class="switch btn-switch">
-
-                <h5>Alarme</h5>
-                <label>
-                    Off
-                    <input id="checkbox" type="checkbox">
-                    <span class="lever"></span>
-                    On
-                </label>
+        <div id="test-swipe-2" class="col s12 red">documentos e fotos para docuemtentaçao do sistema </div>
+        <div id="test-swipe-3" class="col s12 green">
+            <img id="img-register-person" src="">
+            <div class="file-field input-field">
+                <div class="btn" style="width:150px;">
+                    <span>new photo</span>
+                    <input type="file" id="file" />
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" id="value-img" style="display:none">
+                </div>
             </div>
         </div>
-
     </div>
 
-
+    <!-- mostras un modal informando, si quiere mudar el estado actual del alarme -->
     <div id="modal1" class="modal">
-        <div class="modal-content">
-          <h4>Modal Header</h4>
-          <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
+      <div class="modal-content">
+        <p>Tem certeza que deseja ligar o alarme</p>
       </div>
+      <div class="modal-footer">
+        <a href="#test-swipe-1" class="modal-close waves-effect waves-green btn-flat"id="aceitar-ligar">ACEITAR</a>
+        
+        <a href="#test-swipe-2" class="modal-close waves-effect waves-green btn-flat"id="cancelar-ligar">CANCELAR</a>
+      </div>
+    </div>
+    <!-- SGV 20210304 Mostrar el modal para desligar o alarme -->
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <p>Tem certeza que deseja desligar o alarme</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#test-swipe-1" class="modal-close waves-effect waves-green btn-flat" id="aceitar-desligar">ACEITAR</a>
+        
+        <a href="#test-swipe-2" class="modal-close waves-effect waves-green btn-flat" id="cancelar-desligar">CANCELAR</a>
+      </div>
+    </div>
 
     <!-- JavaScrip - Jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -299,19 +318,51 @@ thead td {
             $(".materialboxed").materialbox();
             $('.modal').modal();
             $('.parallax').parallax();
+            $('.tabs').tabs();
+            // SGV 20201207 Show a preview of the image that was placed
+            $("#file").change(function() {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#img-register-person').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
         });
-       
+      
+
+        // SGV 20210403 Mudar e verificar el estado do alarme
         $('#checkbox').on('click', function(){
             var stateAlarm = $('#checkbox')[0].checked;
             if(stateAlarm == true){
-                $('.modal').modal('open', "#modal1");
-            }
-        });
-        // function toggleModal(){
-        //     var instance = M.Modal.getInstance($('#modal1'));
+                $('#modal1').modal('open', "#modal1");
+                $('#aceitar-ligar').on('click', function(){
+                  $('#checkbox').prop('checked', true);
+                });
+                $('#cancelar-ligar').on('click', function(){
+                  $('#checkbox').prop('checked', false);
+                });
 
-        //     instance.open({ dismissible: false});
-        // }
+             }else{
+              $('#modal2').modal('open', "#modal2");
+              $('#aceitar-desligar').on('click', function(){
+                $('#checkbox').prop('checked', false);
+                });
+                $('#cancelar-desligar').on('click', function(){
+                  $('#checkbox').prop('checked', true);
+                });
+              }
+        });
+        /*
+         *  funçao que se executara um ajax para comunicaçao com server 
+         *  @param  
+         *  @return
+         * 
+         */
+        function CommunicationWithServer(){
+        
+        }
 
         var Cal = function(divId) {
 
@@ -320,13 +371,13 @@ this.divId = divId;
 
 // Days of week, starting on Sunday
 this.DaysOfWeek = [
-  'Sun',
-  'Mon',
-  'Tue',
-  'Wed',
-  'Thu',
-  'Fri',
-  'Sat'
+  'dom',
+  'seg',
+  'ter',
+  'qua',
+  'quin',
+  'sex',
+  'sab'
 ];
 
 // Months, stating on January
@@ -386,14 +437,14 @@ var html = '<table>';
 
 // Write selected month and year
 html += '<thead><tr>';
-html += '<td colspan="7">' + this.Months[m] + ' ' + y + '</td>';
+html += '<td class="mes" colspan="7">' + this.Months[m] + ' ' + y + '</td>';
 html += '</tr></thead>';
 
 
 // Write the header of the days of the week
 html += '<tr class="days">';
 for(var i=0; i < this.DaysOfWeek.length;i++) {
-  html += '<td>' + this.DaysOfWeek[i] + '</td>';
+  html += '<td class ="dias">' + this.DaysOfWeek[i] + '</td>';
 }
 html += '</tr>';
 
