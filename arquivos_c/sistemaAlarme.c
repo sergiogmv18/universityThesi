@@ -37,6 +37,26 @@ bool checkTheSchedule(){
 	return (tlocal->tm_hour>=8 && tlocal->tm_hour< 17);
 }
 
+/**
+  *  Create file to know status
+  *  @author  SGV
+  *  @version 20220415    1.1   initial release
+  *  @param <bool> - status
+  *  @return <void>
+  */
+checkAndCreateFile(status){
+  	FILE *pont_arq;
+  	if(status == true){
+  		remove("alarmOff.txt");
+  		pont_arq = fopen("alarmOn.txt", "a");	
+	}else{
+		remove("alarmOn.txt");
+	 	pont_arq = fopen("alarmOff.txt", "a");		
+	}
+   	fclose(pont_arq);
+  	return(0);	
+}
+
 int main(int argc,char* argv[]) {
 	// initializing state
 	char state = START_STATE;
@@ -62,20 +82,24 @@ int main(int argc,char* argv[]) {
 			/*initialize other stuff*/
 			if(!checkIfTodayIsWeekday() || !checkTheSchedule()){
 				state = ACTIVE_STATE;
+				checkAndCreateFile(true);
 			}else{
 				state = INACTIVE_STATE;
+				checkAndCreateFile(false);
 			} 
 			break;
 
 		case INACTIVE_STATE:
 			if (!checkIfTodayIsWeekday() || !checkTheSchedule())
-				state = ACTIVE_STATE;	
+				state = ACTIVE_STATE;
+				checkAndCreateFile(true);	
 			
 			break;
 
 		case ACTIVE_STATE:
 			if (checkIfTodayIsWeekday() && checkTheSchedule()){
 				state = INACTIVE_STATE;
+				checkAndCreateFile(false);
 				// leave the switch statement
 				break;
 			}
@@ -104,6 +128,7 @@ int main(int argc,char* argv[]) {
 				// reset activation timestamp
 				sensorActivationTimestamp = 0;
 				state = ACTIVE_STATE;
+				checkAndCreateFile(true);
 			} else if (currentTimestamp - sensorActivationTimestamp > 10) {
 				// reset activation timestamp
 				sensorActivationTimestamp = 0;
